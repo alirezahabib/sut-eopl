@@ -9,3 +9,5 @@
 *.rkt~
 *.rkt#*
 .#*.rkt
+
+.DS_Store
