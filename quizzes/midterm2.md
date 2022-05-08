@@ -114,7 +114,8 @@
     
 (define (SmoothPerms L d)
   (PermTreeToPerms (PruneSmooth (ListToPermTree L) d)))
-
-
 ```
+
+<img width="582" alt="image" src="https://user-images.githubusercontent.com/73132146/167303814-e2122e66-ad08-468c-a19d-9311836841c9.png">
+
  
