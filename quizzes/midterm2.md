@@ -53,10 +53,22 @@
     [leaf (num) (list (list num))]))
 ```
 
+#### iv
+```scheme
+(define (PruneSmooth T d)
+  (cases Permtree T
+    [root (children) (root (map (λ (x) (PruneSmooth x d)) children))]
+    [node (num children) (node (getnum T) (map (λ (x) (PruneSmooth x d))
+                              (filter (λ (y)
+                                        (< (abs (- (getnum y) (getnum T))) d))
+                                      children)))]      
+    [leaf (num) (leaf num)]))
+```
+
 #### v
 ```scheme
 (define (SmoothPerms L d)
-  (PermTreeToPerms (PruneSmooth (ListToPermTree L))))
+  (PermTreeToPerms (PruneSmooth (ListToPermTree L) d)))
 ```
 
 #### q.2
@@ -85,7 +97,24 @@
                               (apply append (map (λ (child) (PermTreeToPerms child)) children)))]
     [leaf (num) (list (list num))]))
 
+(define (getnum N)
+  (cases Permtree N
+    [root (children) null]
+    [node (num children) num]
+    [leaf (num) num]))
+
+(define (PruneSmooth T d)
+  (cases Permtree T
+    [root (children) (root (map (λ (x) (PruneSmooth x d)) children))]
+    [node (num children) (node (getnum T) (map (λ (x) (PruneSmooth x d))
+                              (filter (λ (y)
+                                        (< (abs (- (getnum y) (getnum T))) d))
+                                      children)))]      
+    [leaf (num) (leaf num)]))
+    
 (define (SmoothPerms L d)
-  (PermTreeToPerms (PruneSmooth (ListToPermTree L))))
+  (PermTreeToPerms (PruneSmooth (ListToPermTree L) d)))
+
+
 ```
  
