@@ -1,4 +1,4 @@
-# EOPL Quiz 6
+# EOPL Quiz 4
 > Alireza Habibzadeh `99109393`
 
 ## 1
