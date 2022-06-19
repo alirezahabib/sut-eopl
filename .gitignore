@@ -11,3 +11,5 @@
 .#*.rkt
 
 .DS_Store
+
+.idea/
