@@ -69,4 +69,3 @@
 (define (SmoothPerms L d)
   (filter (λ (x) (IsSmoothPerm? x d)) (Perms L)))
 ```
- 

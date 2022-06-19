@@ -38,4 +38,3 @@
 
 (define (SmoothPerms L d)
   (PermTreeToPerms (PruneSmooth (ListToPermTree L) d)))
-
