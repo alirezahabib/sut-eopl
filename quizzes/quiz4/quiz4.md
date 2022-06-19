@@ -106,3 +106,39 @@ $$ t_x = int, t_4 = int $$
 |                     | $t_4 = int$ |
 
 عبارت از نظر type درست است و type خروجی هم int است.
+
+
+## 2
+
+### ب
+
+تغییر تابع `type-of`
+دو تایپ جدید به `cases` اضافه می‌شوند که
+`pair-exp`
+و
+`unpair-exp`
+هستند.
+اگر `pair-exp` بود که به سادگی جنس عبارت را به صورت بازگشتی یک pair از جنس (`type-of`) عبارات چپ و راست آن خروجی می‌دهیم.
+
+اگر `unpair-exp` بود باید ابتدا عبارات چپ و راست `p-exp` را بیرون بکشیم (و اگر نمی‌شد و از جنس pair نبود خطا دهیم) سپس `tenv` را با type  
+متغییرهای جدید گسترش دهیم.
+`(extend-tenv var2 ty2 (extend-tenv var1 ty1 tenv))`
+و در نهایت جنس body را در این environment
+جدید پیدا کنیم.
+
+```racket
+#lang eopl
+
+(define type-of
+  (λ (exp tenv)
+    (cases expression exp
+; .
+; .
+; .
+      [pair-exp (exp1 exp2) (pair-type (type-of exp1 tenv) (type-of exp2 tenv))]
+      [unpair-exp (var1 var2 p-exp body)
+                    (cases type (type-of p-exp tenv)
+                      [pair-type (ty1 ty2)
+                                 (type-of body (extend-tenv var2 ty2 (extend-tenv var1 ty1 tenv)))]
+                      [else (eopl:error 'type-of "Not a pair: ~s" exp1)])])))
+```
